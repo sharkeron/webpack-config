@@ -1,5 +1,7 @@
+import './index.scss';
+
 import createMenu from '../../components/menu/menu';
-var menu = createMenu(['Главная','Блог'], 'menu');
+var menu = createMenu(['Главная', 'Блог'], 'menu');
 document.body.appendChild(menu);
 
-console.log('ага')
+console.log('in index.js');
