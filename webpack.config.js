@@ -10,6 +10,7 @@ const extractCSS = require('./webpack/css.extract');
 const uglifyJS = require('./webpack/js.uglify');
 const images = require('./webpack/images');
 
+
 const PATHS = {
 	source: path.join(__dirname, 'source'),
 	build : path.join(__dirname, 'build')

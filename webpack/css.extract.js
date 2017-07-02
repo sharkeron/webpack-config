@@ -1,30 +1,47 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const cssnano = require('cssnano');
 
 module.exports = function(paths) {
 	return {
-		module: {
+		module : {
 			rules: [
 				{
-					test: /\.scss$/,
+					test   : /\.scss$/,
 					include: paths,
-					use: ExtractTextPlugin.extract({
+					use    : ExtractTextPlugin.extract({
 						publicPath: '../',
-						fallback: 'style-loader',
-						use: ['css-loader','sass-loader'],
-					}),
+						fallback  : 'style-loader',
+						use       : ['css-loader', {
+							loader : 'postcss-loader',
+							options: {
+								plugins: function() {
+									return [
+										cssnano({
+											preset      : 'default'
+											,
+										autoprefixer: {
+											browsers: ['last 2 versions'],
+											add     : true
+										}
+										})
+									];
+								}
+							}
+						}, 'sass-loader']
+					})
 				},
 				{
-					test: /\.css$/,
+					test   : /\.css$/,
 					include: paths,
-					use: ExtractTextPlugin.extract({
+					use    : ExtractTextPlugin.extract({
 						fallback: 'style-loader',
-						use: 'css-loader',
-					}),
-				},
-			],
+						use     : 'css-loader'
+					})
+				}
+			]
 		},
 		plugins: [
-			new ExtractTextPlugin('./css/[name].css'),
-		],
+			new ExtractTextPlugin('./css/[name].css')
+		]
 	};
 };
