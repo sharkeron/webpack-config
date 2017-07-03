@@ -1,6 +1,7 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const cssnano = require('cssnano');
 const fontMagician = require('postcss-font-magician');
+const mqpacker = require('css-mqpacker');
 
 module.exports = function(paths) {
 	return {
@@ -17,15 +18,6 @@ module.exports = function(paths) {
 							options: {
 								plugins: function() {
 									return [
-										cssnano({
-											preset      : 'default',
-											autoprefixer: {
-												browsers: ['last 2 versions'],
-												add     : true
-											},
-											minifyFontValues: false,
-											discardUnused: false
-										}),
 										fontMagician({
 											variants: {
 												"Indie Flower": {
@@ -40,6 +32,20 @@ module.exports = function(paths) {
 												}
 											},
 											foundries: ['google']
+										}),
+										cssnano({
+											preset      : 'default',
+											autoprefixer: {
+												browsers: ['last 2 versions'],
+												add     : true
+											},
+											minifyFontValues: false,
+											discardUnused: false
+										}),
+										mqpacker({
+											sort: function (a, b) {
+												return a.localeCompare(b);
+											}
 										})
 									];
 								}
