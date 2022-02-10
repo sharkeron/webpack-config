@@ -15,7 +15,7 @@
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
-    "node-sass": "^4.5.3",
+    "node-sass": "^7.0.0",
     "node-static": "^0.7.9",
     "postcss-font-magician": "^2.0.0",
     "postcss-loader": "^2.0.6",
